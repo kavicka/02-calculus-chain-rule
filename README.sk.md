@@ -90,11 +90,11 @@ PyTorch si počas forward passu zaznamená graf a potom prejde odzadu presne tý
 
 To isté reťazové pravidlo, len 90 krokov dlhé: brzdiace auto musí zastaviť presne na čiare. Miesto zastavenia závisí od sily brzdy `b` cez 90 krokov fyziky, takže `dL/db` je reťaz 90 lokálnych derivácií. Spočítané **ručne, numericky aj v PyTorchi**, presne ako vyššie, všetky tri dajú −650,934. Gradient descent potom nájde správnu brzdu (b = 15 → 66,5, auto zastaví na 250,4 px pri cieli 250 px). Keď auto zastane, `max(0, ·)` gradient zablokuje, rovnako ako ReLU.
 
-![ch02b_chain_rule](../05-racing-lab/assets/ch02b_chain_rule.gif)
+![ch02b_chain_rule](https://github.com/kavicka/05-racing-lab/raw/main/assets/ch02b_chain_rule.gif)
 
 Druhá časť ladí gombík `aggression` vodiča gradient descentom na čase kola (18,2 s → 13,1 s).
 
-Celá kapitola: [Racing Lab · kap. 02](../05-racing-lab/README.sk.md#kap-02--reťazové-pravidlo-a-gradient-descent) · kód: [`ch02b_chain_rule.py`](../05-racing-lab/chapters/ch02b_chain_rule.py), [`ch02_gradient.py`](../05-racing-lab/chapters/ch02_gradient.py)
+Celá kapitola: [Racing Lab · kap. 02](https://github.com/kavicka/05-racing-lab/blob/main/README.sk.md#kap-02--reťazové-pravidlo-a-gradient-descent) · kód: [`ch02b_chain_rule.py`](https://github.com/kavicka/05-racing-lab/blob/main/chapters/ch02b_chain_rule.py), [`ch02_gradient.py`](https://github.com/kavicka/05-racing-lab/blob/main/chapters/ch02_gradient.py)
 
 ## Čo som sa naučil
 - Derivácia je lokálny sklon: o koľko sa pohne výstup na jednotku zmeny vstupu.

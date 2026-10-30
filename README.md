@@ -90,11 +90,11 @@ PyTorch records the graph during the forward pass and runs the exact same chain-
 
 The same chain rule, only 90 steps long: a braking car must stop exactly on a line. Its stop position depends on the brake force `b` through 90 physics steps, so `dL/db` is a chain of 90 local derivatives. Computed **by hand, numerically and with PyTorch**, exactly like above, all three give −650.934. Gradient descent then finds the right brake (b = 15 → 66.5, stops at 250.4 px for a 250 px target). When the car stops, `max(0, ·)` blocks the gradient, the same thing a ReLU does.
 
-![ch02b_chain_rule](../05-racing-lab/assets/ch02b_chain_rule.gif)
+![ch02b_chain_rule](https://github.com/kavicka/05-racing-lab/raw/main/assets/ch02b_chain_rule.gif)
 
 A second part tunes a driver's `aggression` knob by gradient descent on lap time (18.2 s → 13.1 s).
 
-Full chapter: [Racing Lab · ch. 02](../05-racing-lab/README.md#ch-02--chain-rule-and-gradient-descent) · code: [`ch02b_chain_rule.py`](../05-racing-lab/chapters/ch02b_chain_rule.py), [`ch02_gradient.py`](../05-racing-lab/chapters/ch02_gradient.py)
+Full chapter: [Racing Lab · ch. 02](https://github.com/kavicka/05-racing-lab/blob/main/README.md#ch-02--chain-rule-and-gradient-descent) · code: [`ch02b_chain_rule.py`](https://github.com/kavicka/05-racing-lab/blob/main/chapters/ch02b_chain_rule.py), [`ch02_gradient.py`](https://github.com/kavicka/05-racing-lab/blob/main/chapters/ch02_gradient.py)
 
 ## What I learned
 - A derivative is a local slope: how much the output moves per unit of input change.
