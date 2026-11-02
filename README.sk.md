@@ -1,6 +1,6 @@
 # 02 · Derivácie a chain rule
 
-🇬🇧 [English version](README.md)
+🇬🇧 [English version](README.md) · 📘 [Tutoriál krok za krokom](TUTORIAL.sk.md)
 
 ## TL;DR
 Spätný výpočet gradientov na troch operáciách: **ručne** pomocou reťazového pravidla, **približne** malou zmenou vstupu a **automaticky** v PyTorchi. Ručné a PyTorch gradienty sa zhodujú; numerické sú im veľmi blízke. Pri príliš malom kroku `h` numerickú kontrolu pokazí zaokrúhľovanie.

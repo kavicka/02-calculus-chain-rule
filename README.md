@@ -1,6 +1,6 @@
 # 02 · Derivatives & the chain rule
 
-🇸🇰 [Slovenská verzia](README.sk.md)
+🇸🇰 [Slovenská verzia](README.sk.md) · 📘 [Step-by-step tutorial](TUTORIAL.md)
 
 ## TL;DR
 Gradients through three operations, calculated **by hand** with the chain rule, **approximately** by nudging an input, and **automatically** with PyTorch. The hand and PyTorch gradients agree; the numerical estimates come very close. Making the numerical step `h` too small introduces rounding error.
