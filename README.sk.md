@@ -3,9 +3,16 @@
 🇬🇧 [English version](README.md)
 
 ## TL;DR
-Backpropagation na výpočtovom grafe s tromi operáciami, spravená tromi spôsobmi: **ručne** cez chain rule, **numericky** cez konečné diferencie a cez **PyTorch autograd**. Všetkých päť gradientov sa presne zhoduje (napr. ∂L/∂a = −24, ∂L/∂b = 16). Prechod cez veľkosti kroku `h` ukazuje, prečo sú numerické gradienty len kontrola: pod h ≈ 1e-8 ich zaokrúhľovanie v pohyblivej desatinnej čiarke robí *horšími*, nie lepšími.
+Spätný výpočet gradientov na troch operáciách: **ručne** pomocou reťazového pravidla, **približne** malou zmenou vstupu a **automaticky** v PyTorchi. Ručné a PyTorch gradienty sa zhodujú; numerické sú im veľmi blízke. Pri príliš malom kroku `h` numerickú kontrolu pokazí zaokrúhľovanie.
 
 ![Výpočtový graf](assets/computational_graph.png)
+
+## Najprv jednoducho
+Predstav si kalkulačku: vynásobí `a × b`, pripočíta `c` a výsledok umocní na druhú. Pri `a = 2`, `b = −3`, `c = 10` dostane `−6 → 4 → 16`. Teraz sa pýtame: **o koľko sa zmení konečných 16, ak nepatrne pohnem jedným vstupom?**
+
+Odpoveď sa volá **gradient**. Napríklad gradient podľa `a` je `−24`: malé zvýšenie `a` zníži výsledok približne o 24-násobok tejto malej zmeny. Reťazové pravidlo sleduje výpočet odzadu a násobí vplyv jednotlivých krokov. To je základ spätnej propagácie, ktorou sa neurónová sieť učí.
+
+Projekt vypočíta gradienty tromi spôsobmi a porovná ich v tabuľke. Graf ukazuje chybu numerickej kontroly pri rôznych veľkostiach posunu `h`. Tento príklad ešte netrénuje model; pripravuje matematiku pre vlastný autograd v kroku 04.
 
 ## Problém
 V projekte P1 sa stavia vlastný autograd engine. Autograd nie je nič iné ako chain rule aplikovaný odzadu na graf jednoduchých operácií. Predtým, než ho napíšem, chcem vedieť:
@@ -57,7 +64,7 @@ Nezávisle od akejkoľvek analýzy: posuň jeden vstup a zmeraj zmenu.
 # centrálna diferencia: symetrická, presnejšia ako (f(x+h) - f(x)) / h
 (L(a + h) - L(a - h)) / (2 * h)
 ```
-Takto sa testuje autograd engine: ak sa analytický a numerický gradient nezhodujú, backward pass má chybu.
+`h` je veľkosť posunu. Ak sa analytický a numerický gradient výrazne nezhodujú, spätný výpočet môže obsahovať chybu. Malý rozdiel je prirodzený, pretože numerický výsledok je aproximácia.
 
 ### 4. PyTorch autograd
 ```python

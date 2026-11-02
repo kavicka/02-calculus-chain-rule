@@ -3,9 +3,16 @@
 🇸🇰 [Slovenská verzia](README.sk.md)
 
 ## TL;DR
-Backpropagation on a 3-operation computational graph, done three ways: **by hand** with the chain rule, **numerically** with finite differences, and with **PyTorch autograd**. All five gradients agree exactly (e.g. ∂L/∂a = −24, ∂L/∂b = 16). A sweep over the step size `h` shows why numerical gradients are only a sanity check: below h ≈ 1e-8, floating-point rounding makes them *worse*, not better.
+Gradients through three operations, calculated **by hand** with the chain rule, **approximately** by nudging an input, and **automatically** with PyTorch. The hand and PyTorch gradients agree; the numerical estimates come very close. Making the numerical step `h` too small introduces rounding error.
 
 ![Computational graph](assets/computational_graph.png)
+
+## Start here
+Imagine a calculator: it multiplies `a × b`, adds `c`, and squares the result. With `a = 2`, `b = −3`, and `c = 10`, the values are `−6 → 4 → 16`. Now ask: **how much will the final 16 change if I nudge one input?**
+
+The answer is a **gradient**. For example, the gradient with respect to `a` is `−24`: a small increase in `a` lowers the result by approximately 24 times that small increase. The chain rule walks backwards through the calculation and multiplies the effect of each step. This is the basis of backpropagation, which lets neural networks learn.
+
+The project computes gradients three ways and compares them in a table. A plot shows how the numerical check's error changes with the nudge size `h`. This example does not train a model yet; it prepares the maths for the custom autograd in step 04.
 
 ## Problem
 Project P1 builds an autograd engine from scratch. Autograd is nothing more than the chain rule applied backwards through a graph of simple operations. Before writing that engine, I want to be able to:
@@ -57,7 +64,7 @@ Independent of any calculus: nudge one input and measure the change.
 # central difference: symmetric, more accurate than (f(x+h) - f(x)) / h
 (L(a + h) - L(a - h)) / (2 * h)
 ```
-This is how you unit-test an autograd engine: if the analytic gradient and the numerical one disagree, the backward pass has a bug.
+`h` is the nudge size. A substantial disagreement between an analytical and numerical gradient may reveal a bug in the backward pass. A small difference is expected because the numerical result is an approximation.
 
 ### 4. PyTorch autograd
 ```python
